@@ -10,9 +10,6 @@ import flixel.FlxG;
 import flixel.input.keyboard.FlxKey;
 import flixel.addons.transition.FlxTransitionableState;
 import lime.app.Application;
-import meta.data.Discord.DiscordClient;
-
-
 class Init extends FlxState
 {
 	public static var muteKeys:Array<FlxKey> = [FlxKey.ZERO];
@@ -26,8 +23,10 @@ class Init extends FlxState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
+		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
 		meta.data.WeekData.loadTheFirstEnabledMod();
+		#end
 
 		FlxG.game.focusLostFramerate = 60;
 		FlxG.sound.muteKeys = muteKeys;
@@ -61,28 +60,18 @@ class Init extends FlxState
 		FlxTransitionableState.defaultTransIn = FadeTransitionSubstate;
 		FlxTransitionableState.defaultTransOut = FadeTransitionSubstate;
 
-		#if desktop
-		if (!DiscordClient.isInitialized)
-		{
-			DiscordClient.initialize();
-			Application.current.onExit.add((ec)->{DiscordClient.shutdown();});
-		}
-		#end
-
-		#if HIT_SINGLE FlxG.switchState(new KUTValueHandler()); #else FlxG.switchState(new meta.states.TitleState()); #end
+        FlxG.switchState(new meta.states.TitleState());
 	}
 
 	//lalala
 	public static function SwitchToPrimaryMenu(?cl:Class<FlxState>) 
 	{
-		#if HIT_SINGLE MusicBeatState.switchState(new meta.states.HitSingleMenu()); #else
         #if (haxe >= "4.3.0")
 		cl ??= MainMenuState;
         #else
 		cl = cl == null ? MainMenuState : cl;
         #end
 		MusicBeatState.switchState(cast (Type.createInstance(cl,[]),FlxState));//no but what the fuck
-		#end
 
 	}
 

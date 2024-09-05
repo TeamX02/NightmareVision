@@ -28,8 +28,6 @@ class Main extends Sprite
 	var skipSplash:Bool = false; // Whether to skip the flixel splash screen that appears in release mode.
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 	public static var fpsVar:FPSCounter;
-	public static var compilationInformation:TextField;
-	
 	public static var scaleMode:FunkinRatioScaleMode;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
@@ -90,14 +88,6 @@ class Main extends Sprite
 			gameHeight = Math.ceil(stageHeight / zoom);
 		}
 
-		// #if !debug
-		// #if HIT_SINGLE
-		// initialState = meta.states.HitSingleInit;
-		// #else
-		// initialState = TitleState;		
-		// #end
-		// #end
-
 		ClientPrefs.loadDefaultKeys();
 		addChild(new FNFGame(gameWidth, gameHeight, initialState, #if(flixel < "5.0.0")zoom,#end framerate, framerate, skipSplash, startFullscreen));
 
@@ -108,22 +98,6 @@ class Main extends Sprite
 		if(fpsVar != null) {
 			fpsVar.visible = ClientPrefs.showFPS;
 		}
-
-		// #if !DEBUG_MODE
-		// 	compilationInformation = new TextField();
-		// 	compilationInformation.height = FlxG.stage.stageHeight/2;
-		// 	compilationInformation.width = FlxG.stage.stageWidth;
-		// 	compilationInformation.defaultTextFormat = new TextFormat('_sans', 48, FlxColor.WHITE, null, null, null, null, null, openfl.text.TextFormatAlign.CENTER);
-		// 	compilationInformation.text = Date.now().toString() + '\n' + Sys.environment()["USERNAME"].trim();
-		// 	compilationInformation.alpha = 0.675;
-		// 	addChild(compilationInformation);
-		// #end
-
-
-		#if html5
-		FlxG.autoPause = false;
-		FlxG.mouse.visible = false;
-		#end
 
 		FlxG.signals.gameResized.add(onResize);
 		FlxG.signals.preStateSwitch.add(onStateSwitch);
@@ -140,14 +114,6 @@ class Main extends Sprite
 		if (fpsVar != null) {
 			fpsVar.scaleX = fpsVar.scaleY = scale;
 		}
-		// if (compilationInformation!=null) {
-
-		// 	compilationInformation.scaleX = compilationInformation.scaleY = Math.max(1,scale);
-		// 	compilationInformation.height = h;
-		// 	compilationInformation.width = w;
-		// 	compilationInformation.y = h/2;
-		// }
-
 		@:privateAccess if (FlxG.cameras != null) for (i in FlxG.cameras.list) if (i != null && i._filters != null) resetSpriteCache(i.flashSprite);
 		if (FlxG.game != null) resetSpriteCache(FlxG.game);
 		
