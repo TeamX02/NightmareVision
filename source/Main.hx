@@ -101,7 +101,6 @@ class Main extends Sprite
 		ClientPrefs.loadDefaultKeys();
 		addChild(new FNFGame(gameWidth, gameHeight, initialState, #if(flixel < "5.0.0")zoom,#end framerate, framerate, skipSplash, startFullscreen));
 
-		#if !mobile
 		fpsVar = new FPSCounter(10, 3, 0xFFFFFF);
 		addChild(fpsVar);
 		Lib.current.stage.align = "tl";
@@ -109,8 +108,7 @@ class Main extends Sprite
 		if(fpsVar != null) {
 			fpsVar.visible = ClientPrefs.showFPS;
 		}
-		#end
-		
+
 		// #if !DEBUG_MODE
 		// 	compilationInformation = new TextField();
 		// 	compilationInformation.height = FlxG.stage.stageHeight/2;
@@ -130,11 +128,6 @@ class Main extends Sprite
 		FlxG.signals.gameResized.add(onResize);
 		FlxG.signals.preStateSwitch.add(onStateSwitch);
 		FlxG.scaleMode = scaleMode = new FunkinRatioScaleMode();
-
-
-
-
-
 	}
 	private static function onStateSwitch() {
 		scaleMode.resetSize();
