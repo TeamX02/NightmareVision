@@ -16,7 +16,6 @@ import openfl.text.TextFormat;
 import openfl.display.StageScaleMode;
 import meta.states.*;
 import meta.data.*;
-import meta.CompilationStuff;
 #if mobile
 import mobile.SUtil;
 #end
@@ -117,7 +116,6 @@ class Main extends Sprite
 	private static function onStateSwitch() {
 		scaleMode.resetSize();
 	}
-
 
 	static function onResize(w,h) 
 	{

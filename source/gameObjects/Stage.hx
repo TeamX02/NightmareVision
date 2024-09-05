@@ -130,53 +130,6 @@ class Stage extends FlxTypedGroup<FlxBasic>
 			script.stop();
 		super.destroy();
 	}
-
-	//// Stages of the currently loaded mod.
-	// public static function getStageList(modsOnly = false):Array<String>{
-	// 	var rawList:Null<String> = modsOnly ? null : Paths.txt('data/stageList.txt', true);
-
-	// 	#if MODS_ALLOWED
-	// 	var modsList = Paths.txt('data/stageList.txt', false);
-	// 	if (modsList != null){
-	// 		if (rawList != null)
-	// 			rawList += "\n" + modsList;
-	// 		else
-	// 			rawList = modsList;
-	// 	}
-	// 	#end
-		
-	// 	if (rawList == null)
-	// 		return [];
-
-	// 	var stages:Array<String> = [];
-
-	// 	for (i in rawList.trim().split('\n'))
-	// 	{
-	// 		var modStage = i.trim();
-	// 		if (!stages.contains(modStage))
-	// 			stages.push(modStage);
-	// 	}
-
-	// 	return stages;
-	// }
-
-	/*
-	//// stage -> modDirectory
-	public static function getStageMap():Map<String, String>
-	{
-		var directories:Array<String> = [
-			#if MODS_ALLOWED
-			Paths.mods(Paths.currentModDirectory + '/stages/'),
-			Paths.mods('stages/'),
-			#end
-			Paths.getPreloadPath('stages/')
-		];
-
-		var theMap:Map<String, String> = new Map();
-
-		return theMap;
-	}
-	*/
 }
 
 class StageData {
@@ -214,8 +167,6 @@ class StageData {
 		#end
 		else
 			return null;
-
-		trace(path);
 
 		return cast Json.parse(rawJson);
 	}

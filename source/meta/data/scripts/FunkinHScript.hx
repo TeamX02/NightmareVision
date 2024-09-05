@@ -26,7 +26,6 @@ import openfl.media.Sound;
 import sys.FileSystem;
 import sys.io.File;
 #end
-import windows.*;
 
 using StringTools;
 
@@ -56,6 +55,8 @@ class FunkinHScript extends FunkinScript
 			var errMsg = 'Error parsing hscript! '#if hscriptPos + '$name:' + parser.line + ', ' #end + e.message;
 			#if desktop
 			Application.current.window.alert(errMsg, "Error on haxe script!");
+			#else
+			mobile.SUtil.showPopUp(errMsg, "Error on haxe script!");
 			#end
 			trace(errMsg);
 
@@ -194,13 +195,6 @@ class FunkinHScript extends FunkinScript
 
 		set("PsychVideoSprite",gameObjects.PsychVideoSprite);
 		set("CutsceneHandler", meta.data.CutsceneHandler);
-
-		#if HIT_SINGLE
-		set('SuperStructureConnector',SuperStructureConnector);
-		set("ConanLevel", meta.states.ConanLevel);
-		set("Yoshi", gameObjects.Yoshi);
-		set("KUTValueHandler", meta.states.KUTValueHandler);
-		#end
 
 		set("ShaderFilter", openfl.filters.ShaderFilter);
 		set("ColorMatrixFilter", openfl.filters.ColorMatrixFilter);

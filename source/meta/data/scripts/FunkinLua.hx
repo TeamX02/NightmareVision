@@ -82,7 +82,7 @@ class FunkinLua extends FunkinScript
 				#if windows
 				lime.app.Application.current.window.alert(resultStr, 'Error on lua script!');
 				#else
-				luaTrace('Error loading lua script: "$script"\n' + resultStr,true,false);
+				mobile.SUtil.showPopUp(resultStr, 'Error on lua script!');
 				#end
 				lua = null;
 				return;

@@ -39,7 +39,6 @@ import meta.states.*;
 import meta.states.substate.*;
 import gameObjects.*;
 import gameObjects.shader.*;
-import meta.data.Discord.DiscordClient;
 
 using StringTools;
 typedef TitleData =
@@ -88,10 +87,7 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
-		Paths.clearStoredMemory();
-		Paths.clearUnusedMemory();
-
-		#if LUA_ALLOWED
+		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
 		#end
 		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
