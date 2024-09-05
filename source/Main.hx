@@ -17,7 +17,9 @@ import openfl.display.StageScaleMode;
 import meta.states.*;
 import meta.data.*;
 import meta.CompilationStuff;
-
+#if mobile
+import mobile.SUtil;
+#end
 class Main extends Sprite
 {
 	var gameWidth:Int = 1280; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
@@ -40,6 +42,15 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
+
+		#if mobile
+		SUtil.doPermissionsShit();
+		#else
+		Sys.setCwd(SUtil.getStorageDirectory());
+		#end
+
+		// @author YoshiCrafter29, Ne_Eo and MAJigsaw77
+		CrashHandler.init();
 
 		if (stage != null)
 		{
