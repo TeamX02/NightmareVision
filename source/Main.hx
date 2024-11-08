@@ -44,7 +44,6 @@ class Main extends Sprite
 
 		#if mobile
 		SUtil.doPermissionsShit();
-		#else
 		Sys.setCwd(SUtil.getStorageDirectory());
 		#end
 
@@ -99,7 +98,11 @@ class Main extends Sprite
 		}
 
 		ClientPrefs.loadDefaultKeys();
+		#if desktop
 		addChild(new FNFGame(gameWidth, gameHeight, initialState, #if(flixel < "5.0.0")zoom,#end framerate, framerate, skipSplash, startFullscreen));
+		#else
+		addChild(new FNFGame(1280, 720, Init, 60, 60, false, false));
+		#end
 
 		fpsVar = new FPSCounter(10, 3, 0xFFFFFF);
 		addChild(fpsVar);
