@@ -37,6 +37,7 @@ jobs:
           haxelib install hxvlc 1.4.1
           haxelib install flxanimate 3.0.4
           haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
+          haxelib git extension-androidtools https://github.com/MAJigsaw77/extension-androidtools
           haxelib install hscript 2.5.0
           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib run lime rebuild hxcpp
